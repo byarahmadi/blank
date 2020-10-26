@@ -36,7 +36,9 @@ class READ: public Instruction {
     }
     unsigned int execute(stack<int> &eval_stack)  {
         int value;
-        cin>>value;
+        while(!(cin >> value)) {
+          exit(0);
+        }
         eval_stack.push(value);
         return index + 1;
     }
