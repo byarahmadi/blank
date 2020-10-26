@@ -49,6 +49,7 @@ class WRITE: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 1);
         int TOP = eval_stack.top(); eval_stack.pop();
         cout<<TOP<<endl;
         return index + 1;
@@ -61,7 +62,8 @@ class DUP: public Instruction {
     :Instruction{init_program,init_index,init_opcode} {
         
     }
-    unsigned int execute(stack<int> &eval_stack) {
+    unsigned int execute(stack<int> &eval_stack) { 
+        assert(eval_stack.size() >= 1);
         int TOP = eval_stack.top();
         eval_stack.push(TOP);
         return index + 1;
@@ -75,6 +77,7 @@ class MUL: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2);
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         eval_stack.push(TOP * SECOND);
@@ -89,6 +92,7 @@ class ADD: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2);
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         eval_stack.push(TOP + SECOND);
@@ -103,6 +107,7 @@ class SUB: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2);
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         eval_stack.push(TOP - SECOND);
@@ -117,11 +122,11 @@ class GT: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2);        
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         eval_stack.push(TOP > SECOND);
         return index + 1;
-
     }
     
 };
@@ -132,6 +137,7 @@ class LT: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2); 
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         eval_stack.push(TOP < SECOND);
@@ -146,6 +152,7 @@ class EQ: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2);
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         eval_stack.push(TOP == SECOND);
@@ -160,6 +167,7 @@ class JMPZ: public Instruction {
         
     }
     unsigned int execute(stack<int> &eval_stack) {
+        assert(eval_stack.size() >= 2);
         int TOP = eval_stack.top(); eval_stack.pop();
         int SECOND = eval_stack.top(); eval_stack.pop();
         if (SECOND == 0)
@@ -197,6 +205,7 @@ class POP:public OneOperandInstruction {
     :OneOperandInstruction{init_program,init_index,init_opcode,init_operand} {
     }
     unsigned int execute(stack<int> &eval_stack) {
+       assert(eval_stack.size() >= operand);
        for (int i = 0;i < operand; ++i) {
           eval_stack.pop();
        }
@@ -209,6 +218,7 @@ class ROT:public OneOperandInstruction {
     :OneOperandInstruction{init_program,init_index,init_opcode,init_operand} {
     }
     unsigned int execute(stack<int> &eval_stack) {
+       assert(eval_stack.size() >= operand);
        vector<int> aux;
        for (int i = 0;i < operand; ++i) {
           int value = eval_stack.top(); eval_stack.pop();

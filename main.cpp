@@ -16,11 +16,14 @@ using namespace std;
 										   
 int main(int argc,char *argv[]) {
 	
-//	Instruction inst0(0,"READ");
-        string filename = "example.class";
-        Program *program = new Program(filename);
-        program->print();	
-        program->run();	
-	return 0;
+    if (argc != 2) {
+       cerr<<endl<<"Arguments to the program must be well specified!"<<endl;
+       return 11;
+    }
+    string filename = argv[1];
+    Program *program = new Program(filename);
+//    program->print();	
+    program->run();	
+    return 0;
 	
 }

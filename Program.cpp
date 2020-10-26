@@ -58,7 +58,6 @@ int Program::parse() {
         while(getline(asmfile,line)) {
             
             vector<string> tokens = split(line, delimiter);
-            //cout<<line<<" "<<tokens.size()<<endl;
             if (tokens.size() <= 1 || tokens.size() > 3) {
                 std::cout<<"Error : line :"<<line<<endl<<"Token size is :"<<tokens.size();
                 return 11;

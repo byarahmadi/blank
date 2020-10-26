@@ -15,7 +15,8 @@ class Program {
     private :
     fstream asmfile;
     std::vector<Instruction *> instructions;
-    stack<int> eval_stack; // Evaluation Stack
+    /* Evaluation stack for operands */
+    stack<int> eval_stack; 
     vector<string> split (string s, string delimiter);
     std::unordered_set<std::string> mnemonics{"READ","WRITE","DUP","MUL" ,"ADD"  ,"SUB",
                                                       "GT","LT"   ,"EQ","JMPZ","PUSH" ,"POP","ROT"};
@@ -23,14 +24,12 @@ class Program {
     int parse();
       
     public :
-    
+    /*!constructor */
     Program(string filename);
-        
-    
+    /* Prints instructions of the program in stdout */
     void print();
+    /* Executes the program */
     void run();
-
-    friend class Instruction;
     
 };
 
